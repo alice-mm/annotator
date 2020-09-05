@@ -1,0 +1,161 @@
+= Annotator
+:toc:
+:experimental:
+
+🇬🇧 Annotation tool for pictures, using https://www.imagemagick.org/[ImageMagick]. +
+🇫🇷 Outil pour annoter des images, basé sur https://www.imagemagick.org/[ImageMagick].
+
+
+== 🇬🇧 English
+
+These Bash scripts can process multiple pictures in a row, adding a given text as an annotation or each of them.
+
+I mostly use this when uploading pictures on websites other than my own, to add my name on them.
+
+You can also decide to resize the pictures, to save them to another format, and to decrease their quality (for JPGs).
+
+TIP: See the documentation of https://www.imagemagick.org/[ImageMagick]’s `convert` tool for details regarding conversion options.
+
+
+=== Prerequisites
+
+- [x] ImageMagick, of course.
++
+[source, bash]
+----
+$ sudo apt install imagemagick
+----
++
+For non-Ubuntu, non-Debian platforms, I’ll let you Google that or check out https://www.imagemagick.org/[].
+
+- [x] Bash{nbsp}4.3 or better.
+
+
+=== Step by step
+
+. Run `./reset.sh` to clear input and output directories and to create any required directory that may be missing.
+  You will be asked whether you want to _also_ clear existing output files.
+  Answer by typing `1` or `2` (depending on your choice) and hitting btn:[Enter].
++
+[TIP]
+====
+You can pre-answer when running the script, using for example:
+
+[source, bash]
+----
+./reset.sh <<< 1
+# or
+./reset.sh <<< 2
+----
+====
+
+. Look into the `input/` directory.
+  You’ll see a bunch of subdirectories, there.
+  Each of them corresponds to https://www.imagemagick.org/script/command-line-options.php#gravity[a “gravity”, i.e., a place to put the text on your pictures].
+  For example, the “south” gravity will place your text at the bottom of the picture, while the “northeast” gravity will place it in the upper right corner.
+
+. Place the pictures you want to process in the input subdirectories.
+  If, for a given picture, you think “the text should be in the upper right corner”, place this picture in `input/northeast/`, and so on.
+
+. Open `configuration.conf` to tweak the configuration options if needed.
++
+[CAUTION]
+====
+Use https://en.wikipedia.org/wiki/Text_editor[a text editor], like Gedit, Geany, Notepad++, Mousepad…
+Not Word or LibreOffice{nbsp}Writer (those are _word processors_, not _text editors_).
+====
++
+Each configuration option has a description in the configuration file itself, so I won’t repeat everything here.
+Read the lines starting with a{nbsp}``#`` (AKA{nbsp}“comments”).
++
+The most important configuration options are probably:
++
+[horizontal]
+Language::
+    To control the language used in the messages that get printed during the execution.
+    English and French (`en` and `fr` respectively) are supported.
+
+Text::
+    What will get written on the pictures.
+
+. Run `./annotate.sh` to start the process.
+
+. Check the result in `output/`.
+
+// ================================================================
+
+== 🇫🇷 Français
+
+Ces scripts Bash peuvent traîter plusieurs images à la suite, ajoutant un texte donné en tant qu’annotation sur chacune d’entre elles.
+
+J’utilise principalement cela lorsque je m’apprête à mettre des photos en ligne sur un site autre que le mien, pour ajouter mon nom dessus.
+
+Vous pouvez aussi demander à redimensionner les images, à les enregistrer dans un autre format, ou à baisser leur qualité (pour les JPG).
+
+TIP: Voir la documentation de l’outil `convert` de https://www.imagemagick.org/[ImageMagick] si vous voulez des détails sur les options de conversion.
+
+
+=== Prérequis
+
+- [x] ImageMagick, bien sûr.
++
+[source, bash]
+----
+$ sudo apt install imagemagick
+----
++
+Si vous utilisez autre chose que Ubuntu ou Debian, je vous laisse chercher sur Google ou sur https://www.imagemagick.org/[].
+
+- [x] Bash{nbsp}4.3 ou plus.
+
+
+=== Étape par étape
+
+. Lancez `./reset.sh` pour vider les répertoires d’entrée et de sortie, et pour créer tout les répertoires nécessaires au bon déroulement de la procédure.
+  Le script vous demandera si vous voulez _aussi_ supprimer les éventuelles images de sortie précédemment générées.
+  Répondez en entrant `1` or `2` (selon votre choix) et appuyez sur btn:[Entrée].
++
+[TIP]
+====
+Vous pouvez répondre à l’avance au moment où vous lancez le script, en utilisant par exemple :
+
+[source, bash]
+----
+./reset.sh <<< 1
+# ou
+./reset.sh <<< 2
+----
+====
+
+. Examinez le contenu du répertoire `input/`.
+  Vous y verrez toute une gamme de sous-répertoire.
+  Chacun correspond à https://www.imagemagick.org/script/command-line-options.php#gravity[une « gravité », c.-à-d. un endroit où placer le texte sur les images].
+  Par exemple, la gravité « south » (sud) placera votre texte en bas de l’image, tandis que « northeast » (nord-est) optera pour le coin supérieur droit.
+
+. Placez les images que vous voulez traîter dans les sous-répertoires d’entrée.
+  Si, pour une image donnée, vous pensez « le texte doit être mis en haut à droite », mettez-la dans `input/northeast/`, et ainsi de suite.
+
+. Ouvrez `configuration.conf` pour faire des réglages si besoin.
++
+[CAUTION]
+====
+Utilisez https://fr.wikipedia.org/wiki/%C3%89diteur_de_texte[un éditeur de texte], comme Gedit, Geany, Notepad++, Mousepad…
+Pas Word ou LibreOffice{nbsp}Writer (ça, ce sont des logiciels de _traîtement de texte_, pas des _éditeurs de texte_).
+====
++
+Chaque option de configuration possède une description dans le fichier de configuration lui-même, donc je ne répéterai pas tout ici.
+Lisez les lignes qui commencent par un{nbsp}``#`` (les « commentaires »).
++
+Les options les plus importantes sont probablement :
++
+[horizontal]
+Language::
+    Pour choisir la langue utilisée dans les messages affichés durant l’exécution des scripts.
+    L’anglais et le français (`en` et `fr` respectivement) sont supportés.
+
+Text::
+    Ce qui sera écrit sur vos images.
+
+. Lancez `./annotate.sh` pour démarrer le traîtement.
+
+. Vérifiez le résultat dans `output/`.
